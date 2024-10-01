@@ -1,0 +1,37 @@
+EJERCICIO - Crear el micro-servicio-carrito
+
+puerto: 8003
+nombre de app: servicio-carrito
+
+debe estar registrado en eureka server
+
+
+en com.viewnext.models crear la clase Carrito:
+	String id
+	String usuario
+	List<Pedido> contenido
+	double importe
+
+
+en com.viewnext.persistence    CarritosDAO con MongoDB
+
+	metodo personalizado:  public Carrito findByUsuario(String usuario);
+
+
+en com.viewnext.service :
+	Interface  CarritoService:
+	       Carrito crear(String usuario)
+	       void agregarPedido(Long id, Integer cantidad, String usuario)
+	       Carrito consultar(String usuario)
+	       void eliminarPedido(Long id, String usuario)
+
+	Clase CarritoServiceImpl que implementa la interface
+			Peticiones a otro servicio a traves de Feign
+
+
+en com.viewnext.rest    crear CarritoREST 
+
+		Carrito crear(String usuario)  (método Post)
+	       void agregarPedido(Long id, Integer cantidad, String usuario)   (método PUT)
+	       Carrito consultar(String usuario)   (método GET)
+	       void eliminarPedido(Long id, String usuario)   (método DELETE)
